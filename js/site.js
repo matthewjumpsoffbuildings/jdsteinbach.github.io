@@ -41,8 +41,7 @@ function loadCSS( href, before, media, callback ){
 // loadCSS( "/css/main.css" );
 
 // Control form fields
-var form_boxes =  document.querySelectorAll('.mc-field-group, .field-group');
-// var form_inputs = form_boxes.querySelector('textarea, input');
+var form_boxes = document.querySelectorAll('.mc-field-group, .field-group');
 
 function activate_field(el) {
   el.parentNode.classList.add('active-input');
@@ -54,7 +53,7 @@ function deactivate_field(el) {
   }
 }
 
-Array.prototype.forEach.call(form_boxes, function(el, i){
+Array.prototype.forEach.call(form_boxes, function(el, i) {
   var form_input = el.querySelector('textarea, input');
 
   deactivate_field(form_input);
@@ -70,35 +69,93 @@ Array.prototype.forEach.call(form_boxes, function(el, i){
   });
 });
 
-(function($) {
-  var $cf = $('#contact-form'),
-      $fm = $('.form-message');
+function submit_async_form(form) {
+  var form_message = document.querySelector('.form-message'),
+      url          = form.getAttribute('action'),
+      inputs       = form.querySelectorAll('input:not([type="submit"]),textarea'),
+      submit       = form.querySelector('input[type="submit"]');
 
-  if ( $cf.length > 0 ) {
-    $cf.submit(function(e){
-      e.preventDefault();
+  url = '//api.jdsteinbach.com/mail/';
 
-      var form_data = $cf.serialize();
+  submit.addEventListener('click', function(event) {
+    event.preventDefault();
 
-      $.ajax({
-        type: 'POST',
-        url: $cf.attr('action'),
-        data: form_data
-      })
-      .done(function(response) {
-        $fm.removeClass('error').addClass('success').html(response);
-        $('#name').val('');
-        $('#email').val('');
-        $('#message').val('');
-      })
-      .fail(function(data) {
-        $fm.removeClass('success').addClass('error');
-        if (data.responseText !== '') {
-          $fm.html(data.responseText);
-        } else {
-          $fm.html('<p>Sorry, an error occured and your message could not be sent.</p>');
-        }
-      });
+    var data = [];
+    var data_obj = {};
+
+    Array.prototype.forEach.call(inputs, function(el, i) {
+      data.push(el.name + '=' + el.value);
+      data_obj[el.name] = el.value;
     });
-  }
-})(jQuery);
+    data = data.join('&');
+    data_obj= JSON.serialize(data_obj);
+
+    console.log(data);
+    console.log(data_obj);
+
+    var request = new XMLHttpRequest();
+
+    request.open('POST', 'https:' + url, true);
+
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+    request.onload = function() {
+      // does onload or onreadystatechange matter??
+      form_message.innerHTML = request.responseText;
+      if (request.status >= 200 && request.status < 400) {
+        // ^ if request.readystate == 4 ??
+        // Success!
+        form_message.classList.add('success');
+        Array.prototype.forEach.call(inputs, function(el, i) {
+          el.value = '';
+        });
+      } else {
+        // We reached our target server, but it returned an error
+        form_message.classList.add('success');
+      }
+    };
+
+    request.onerror = function() {
+      // There was a connection error of some sort
+    };
+
+    request.send(data);
+
+    });
+}
+
+var contact_form = document.getElementById('contact-form');
+submit_async_form(contact_form);
+
+// (function($) {
+//   var $cf = $('#contact-form'),
+//       $fm = $('.form-message');
+
+//   if ( $cf.length > 0 ) {
+//     $cf.submit(function(e){
+//       e.preventDefault();
+
+//       var form_data = $cf.serialize();
+//       console.log(form_data);
+//       // $.ajax({
+//       //   type: 'POST',
+//       //   url: $cf.attr('action'),
+//       //   data: form_data
+//       // })
+//       // .done(function(response) {
+//       //   $fm.removeClass('error').addClass('success').html(response);
+//       //   $('#name').val('');
+//       //   $('#email').val('');
+//       //   $('#message').val('');
+//       // })
+//       // .fail(function(data) {
+//       //   $fm.removeClass('success').addClass('error');
+//       //   if (data.responseText !== '') {
+//       //     $fm.html(data.responseText);
+//       //   } else {
+//       //     $fm.html('<p>Sorry, an error occured and your message could not be sent.</p>');
+//       //   }
+//       // });
+//     });
+//   }
+// })(jQuery);

@@ -2,17 +2,19 @@
  * COLORS
  * From: http://www.colourlovers.com/palette/38562/Hands_On
  */
-$color-blue:        #2790B0;
-$color-blue-dark:   #2B4E72;
+$random-blue-hue:   210deg + random(60);
 
-$color-green:       #94BA65;
-$color-green-dark:  #69895c;
+$color-blue:        hsl($random-blue-hue, 62%, 38%);
+$color-blue-dark:   scale-color($color-blue, $lightness: 24%);
 
-$color-red:         #a9240a;
-$color-red-dark:    #673712;
+$color-green:       adjust-hue($color-blue, -120deg);
+$color-green-dark:  scale-color($color-green, $lightness: 24%);
+
+$color-red:         adjust-hue($color-blue, 120deg);
+$color-red-dark:    scale-color($color-red, $lightness: 24%);
 
 $color-gray:        #4E4D4A;
-$color-gray-dark:   #353432;
+$color-gray-dark:   scale-color($color-gray, $lightness: 24%);
 
 $color-text:        $color-gray;
 $color-text-alt:    $color-gray-dark;
