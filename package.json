@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "jdsteinbach.com static site generator",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "gulp watch",
+    "build": "gulp build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jdsteinbach/jdsteinbach.github.io.git"
