@@ -1,3 +1,5 @@
+@import 'mq-helpers';
+
 // Generate a map of custom-properties per context (only selector-based context rn)
 // Output custom property syntax with proper fallback and unsupported browser fallback
 
@@ -30,7 +32,7 @@ $custom-properties: (':root': ());
 
 @mixin output-props {
   @each $context, $values in $custom-properties {
-    #{$context} {
+    @include parse-mq($context) {
       @include print-props($values);
     }
   }

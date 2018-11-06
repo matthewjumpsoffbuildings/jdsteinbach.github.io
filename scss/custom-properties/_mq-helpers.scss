@@ -1,0 +1,21 @@
+@function _is-mq($string) {
+  @return str-index($string, "@media ") == 1;
+}
+
+@function _get-mq($string) {
+  @return str-slice($string, 8);
+}
+
+@mixin parse-mq($string) {
+  @if _is-mq($string) {
+    @media #{_get-mq($string)} {
+      :root {
+        @content;
+      }
+    }
+  } @else {
+    @at-root #{$string} {
+      @content;
+    }
+  }
+}

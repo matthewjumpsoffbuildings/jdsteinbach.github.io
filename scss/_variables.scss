@@ -127,10 +127,12 @@ $xlarge-vars: (
 
 @each $name, $prop in $root-vars {
   @include set-prop($name, $prop);
+  @include set-prop($name, $prop, '.theme-light');
 }
 
 @each $name, $prop in $dark-vars {
   @include set-prop($name, $prop, '.theme-dark');
+  @include set-prop($name, $prop, '@media (prefers-color-scheme: dark)');
 }
 
 
