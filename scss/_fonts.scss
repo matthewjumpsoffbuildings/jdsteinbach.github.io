@@ -1,27 +1,29 @@
 @mixin fonts($family, $file, $style, $weight) {
   @font-face {
     font-family: $family;
-    src:  url('/webfonts/#{$file}.eot');
-    src:  url('/webfonts/#{$file}.woff2') format('woff2'), url('/webfonts/#{$file}.woff') format('woff'); //sass-lint:disable-line no-duplicate-properties
+    src:  url('/webfonts/#{$file}.woff2') format('woff2'), url('/webfonts/#{$file}.woff') format('woff');
     font-style: $style;
     font-weight: $weight;
     font-display: swap;
   }
 }
 
-@mixin v-fonts($family, $file-name, $style, $format) {
+@mixin v-fonts($family, $file, $style) {
   @font-face {
     font-family: $family;
-    src: url('/webfonts/#{$file-name}') format('#{$format}');
+    src: url('/webfonts/#{$file}.woff2') format('woff2');
     font-style: $style;
   }
 }
 
-@include fonts(Mono, mono-regular, normal, normal);
-@include fonts(Mono, mono-italic, italic, normal);
-@include fonts(Mono, mono-bold, normal, bold);
-@include fonts(Mono, mono-bolditalic, italic, bold);
+@include fonts(Source Sans, SourceSansPro-Regular, normal, normal);
+@include fonts(Source Sans, SourceSansPro-It, italic, normal);
+@include fonts(Source Sans, SourceSansPro-Bold, normal, bold);
+@include fonts(Source Sans, SourceSansPro-BoldItalic, italic, bold);
+@include fonts(Source Code, SourceCodePro-Regular, normal, normal);
+@include fonts(Source Code, SourceCodePro-Regular, italic, normal);
+@include fonts(Source Code, SourceCodePro-Bold, normal, bold);
+@include fonts(Source Code, SourceCodePro-Bold, italic, bold);
 
-@include v-fonts(Mono VF, "mono-v.ttf", normal, truetype);
-@include v-fonts(Mono VF, "mono-v-italic.ttf", italic, truetype);
-@include v-fonts(Venn VF, "venn-v.woff2", normal, woff2);
+@include v-fonts(Source Sans VF, "SourceSansVariable-Roman", normal);
+@include v-fonts(Source Sans VF, "SourceSansVariable-Italic", italic);
