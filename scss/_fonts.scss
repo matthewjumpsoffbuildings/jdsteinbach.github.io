@@ -1,8 +1,7 @@
 @mixin fonts($family, $file, $style, $weight) {
   @font-face {
     font-family: $family;
-    src:  url('/webfonts/#{$file}.eot');
-    src:  url('/webfonts/#{$file}.woff2') format('woff2'), url('/webfonts/#{$file}.woff') format('woff'); //sass-lint:disable-line no-duplicate-properties
+    src:  url('/webfonts/#{$file}.woff2') format('woff2'), url('/webfonts/#{$file}.woff') format('woff');
     font-style: $style;
     font-weight: $weight;
     font-display: swap;
@@ -17,10 +16,18 @@
   }
 }
 
-@include fonts(Quattro, quattro-regular, normal, normal);
-@include fonts(Quattro, quattro-italic, italic, normal);
-@include fonts(Quattro, quattro-bold, normal, bold);
-@include fonts(Quattro, quattro-bold-italic, italic, bold);
+@include fonts(Mono, mono-regular, normal, normal);
+@include fonts(Mono, mono-italic, italic, normal);
+@include fonts(Mono, mono-bold, normal, bold);
+@include fonts(Mono, mono-bold-italic, italic, bold);
 
-@include v-fonts(QuattroV, quattro-v, normal);
-@include v-fonts(QuattroV, quattro-v-italic, italic);
+@include fonts(WorkSans, work-sans-regular, normal, normal);
+@include fonts(WorkSans, work-sans-italic, italic, normal);
+@include fonts(WorkSans, work-sans-bold, normal, bold);
+@include fonts(WorkSans, work-sans-bold-italic, italic, bold);
+
+@include v-fonts(MonoV, mono-v, normal);
+@include v-fonts(MonoV, mono-v-italic, italic);
+
+@include v-fonts(WorkSansV, work-sans-v, normal);
+@include v-fonts(WorkSansV, work-sans-v-italic, italic);

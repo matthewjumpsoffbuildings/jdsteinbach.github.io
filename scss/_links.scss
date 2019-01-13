@@ -98,7 +98,7 @@ a {
   }
 
   @include haf {
-    font-variation-settings: "wght" 700;
+    font-variation-settings: "wght" $font-weight--variable-bold;
 
     &::before {
       transform: scaleX(1) rotate(-1deg) translateY(0);

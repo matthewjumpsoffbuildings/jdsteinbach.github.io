@@ -79,9 +79,9 @@ $root-vars: (
 
   fs-body: (18rem / 16),
 
-  font-body: (Quattro, Helvetica Neue, Helvetica, Roboto, Segoe UI, sans-serif),
+  font-body: (WorkSans, Helvetica Neue, Helvetica, Roboto, Segoe UI, sans-serif),
   font-headline: var(--font-body),
-  font-code: var(--font-body),
+  font-code: (Mono, monospace),
 
   toggle-icon: svg-load('icons/theme.svg', fill=#{rgba($color-link, .65)})
 );
@@ -146,6 +146,10 @@ $border-radius-default: 0;
 
 // TYPE
 $font-sizes: sm p blockquote subtitle title hero;
+$font-weight--variable-normal: 350;
+$font-weight--variable-light: 250;
+$font-weight--variable-semibold: 600;
+$font-weight--variable-bold: 800;
 $start-small: true;
 $base-line-height: 1.8;
 $base-font-scale: 1.25;

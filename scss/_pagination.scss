@@ -7,11 +7,11 @@
 
   a {
     @include use-prop(color, color-link);
-    font-variation-settings: "wght" 500;
+    font-variation-settings: "wght" $font-weight--variable-semibold;
 
     @include haf {
       @include use-prop(color, color-link-alt);
-      font-variation-settings: "wght" 700;
+      font-variation-settings: "wght" $font-weight--variable-bold;
     }
   }
 

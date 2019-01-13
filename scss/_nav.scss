@@ -22,7 +22,7 @@
     border: 1px solid currentColor;
     border-radius: 3px;
     font-weight: bold;
-    font-variation-settings: "wght" 700;
+    font-variation-settings: "wght" $font-weight--variable-bold;
   }
 
   &:last-child {
